@@ -1,37 +1,52 @@
-import { Tabs } from 'expo-router';
+// import { Tabs } from 'expo-router';
 import React from 'react';
 
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import HomeScreen from '.';
+import TabTwoScreen from './explore';
+import Camera from '@/components/navigation/Camera';
+import Call from '@/components/navigation/Call';
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+import { FontAwesome } from '@expo/vector-icons';
+import { MainTabParamList } from '@/constants/types';
+
+const Tabs = createMaterialTopTabNavigator<MainTabParamList>();
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
   return (
-    <Tabs
+    <Tabs.Navigator
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
+        tabBarActiveTintColor: 'white',
+        tabBarStyle:{
+          backgroundColor:'darkgreen'
+        },
+        tabBarIndicatorStyle:{
+          backgroundColor:'white',
+          height:4
+        },
+        tabBarLabelStyle:{
+          fontWeight:'bold'
+        }
       }}>
-      <Tabs.Screen
-        name="index"
+        <Tabs.Screen
+        name="Camera"
+        component={Camera}
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
-          ),
-        }}
-      />
-    </Tabs>
+          tabBarLabel:()=> null,
+          tabBarIcon:()=><FontAwesome name="camera" size={18} color="white" />
+        }}/>
+        <Tabs.Screen
+          name="Chats"
+          component={HomeScreen}
+        />
+        <Tabs.Screen
+          name="Status"
+          component={TabTwoScreen}
+        />
+        <Tabs.Screen
+          name="Calls"
+          component={Call}
+        />
+    </Tabs.Navigator>
   );
 }
