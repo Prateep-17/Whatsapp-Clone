@@ -1,19 +1,24 @@
-import { Image, StyleSheet, Text } from 'react-native';
+import ChatListItem from '@/components/navigation/ChatListItem';
+import { FlatList, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-
+import ChatRooms from '@/constants/ChatRooms';
 export default function HomeScreen() {
   return (
-    <SafeAreaView>
-      <Text>hello</Text>
+    <SafeAreaView style={styles.container}>
+      <FlatList
+        data={ChatRooms}
+        renderItem={({item})=><ChatListItem chatRoom={item}/>}
+      />
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
+  container: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
+    paddingHorizontal:2
   },
   stepContainer: {
     gap: 8,
