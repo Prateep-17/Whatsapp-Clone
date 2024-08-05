@@ -1,12 +1,10 @@
 // import { Tabs } from 'expo-router';
 import React from 'react';
-
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import HomeScreen from '.';
 import TabTwoScreen from './explore';
-import Camera from '@/components/navigation/Camera';
-import Call from '@/components/navigation/Call';
-import { TabBarIcon } from '@/components/navigation/TabBarIcon';
+import Camera from './Camera';
+import Call from './Call';
 import { FontAwesome } from '@expo/vector-icons';
 import { MainTabParamList } from '@/constants/types';
 

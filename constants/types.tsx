@@ -6,19 +6,20 @@ export type MainTabParamList = {
 }
 
 export type user ={
-    id: String,
-    imageUri: string,
-    name: String
+    id: string,
+    imageUri?: string,
+    name: string
 }
 
 export type message = {
-    id: String,
-    content: String,
-    createdAt: string
+    id: string,
+    content: string,
+    createdAt: string,
+    user?: user
 }
 
 export type ChatRoom ={
-    id:String,
-    users: Array<user>,
+    id:string,
+    users: user[],
     lastMessage: message
 }

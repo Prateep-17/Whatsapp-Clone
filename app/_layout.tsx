@@ -8,10 +8,12 @@ import 'react-native-reanimated';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { View, StyleSheet } from 'react-native';
-import { Entypo } from '@expo/vector-icons';
+import { Entypo, FontAwesome5 } from '@expo/vector-icons';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import NotFoundScreen from './+not-found';
 import TabLayout from './(tabs)/_layout';
+import ChatRoom from './ChatRoom';
+import Contacts from './Contacts';
 
 const Stack = createNativeStackNavigator();
 
@@ -39,8 +41,9 @@ export default function RootLayout() {
       <Stack.Navigator
       screenOptions={{
         headerShadowVisible:false,
+        headerTintColor:"white",
         headerStyle:{
-          backgroundColor: 'darkgreen'
+          backgroundColor: 'darkgreen',
         }
       }}>
         <Stack.Screen name="(tabs)"
@@ -54,6 +57,17 @@ export default function RootLayout() {
                   <Entypo name="dots-three-vertical" size={24} color="white" />    
                 </View>,
           }} />
+        <Stack.Screen name="ChatRoom" component={ChatRoom}
+          options={({route}:any)=>({
+            title: route.params.name,
+            headerRight: ()=>
+              <View style={styels.headerBar}>
+                  <FontAwesome5 name = {'video'} size={24} color='white'/>
+                  <TabBarIcon name = {'call'} size={24} color='white'/>
+                  <Entypo name="dots-three-vertical" size={24} color="white" />    
+                </View>
+          })}/>
+        <Stack.Screen name="Contacts" component={Contacts}/>
         <Stack.Screen name="+not-found" component={NotFoundScreen}/>
       </Stack.Navigator>
     </ThemeProvider>
